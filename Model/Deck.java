@@ -1,19 +1,24 @@
 package Model;
+import Model.Card;
 
 public class Deck {
-    Card cards[]= new Card[51];
+    private Card [] NewDeck = new Card[52];
+    private String[] Suits = new String[] {"Corazones", "Diamantes", "Tréboles", "Picas"};
 
-
-    static void Deckgenerator(){
-        String[] numeros = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-        String[] palos = {"Corazones", "Diamantes", "Picas", "Tréboles"};
-        for (String numero : numeros) {
-            for (String palo : palos) {
-                Deck.Addcard(numero + " de " + palo);
+    private Card [] rellenarmazo(int [] Cards){
+        int index = 0;
+        for (String suit : Suits) {
+            for (int i = 0; i < 13; i++) {
+                NewDeck[index] = new Card(suit, Cards[i]);
+                index++;
             }
         }
+        return NewDeck;
     }
 
-    public static int Addcard(Card card)
+    public void ShowDeck() {
+        for (Card card : NewDeck) {
+            System.out.println(card);
+        }
+    }
 }
-
