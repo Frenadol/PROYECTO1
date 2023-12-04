@@ -3,18 +3,19 @@ package Model;
 import java.util.Objects;
 
 public class Card {
-    private int value;
+    private String value;
     private String suit;
 
-    public Card(int value, String suit) {
+    public Card(String value, String suit) {
         this.value = value;
         this.suit = suit;
     }
     public Card(){
-        this(0,"");
+        this("","");
     }
 
-    public int getValue() {
+
+    public String getValue() {
         return value;
     }
 
@@ -22,7 +23,7 @@ public class Card {
         return suit;
     }
 
-    public void setValue(int value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

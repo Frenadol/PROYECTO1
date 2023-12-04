@@ -2,18 +2,32 @@ package Model;
 import Model.Card;
 
 public class Deck {
-    private Card [] NewDeck = new Card[52];
-    private String[] Suits = new String[] {"Corazones", "Diamantes", "Tréboles", "Picas"};
 
-    private Card [] rellenarmazo(int [] Cards){
+    public static Card [] NewDeck = new Card[52];
+    private static String[] Suits = new String[] {"Corazones", "Diamantes", "Tréboles", "Picas"};
+    private static String[] Values = new String[] {"As", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+
+    public Deck(){
+        rellenarmazo();
+    }
+
+    /**
+     * Quiero rellenar mi mazo
+     * Una carta esta formada por un string y un entero
+     */
+    public static Card [] rellenarmazo(){
         int index = 0;
-        for (String suit : Suits) {
-            for (int i = 0; i < 13; i++) {
-                NewDeck[index] = new Card(suit, Cards[i]);
+        //devolver arreglo
+        int Cards []=new int[52];
+        for (String Suit : Suits) {
+            for (String Values : Values) {
+                NewDeck[index] = new Card(Values, Suit);
+
                 index++;
             }
         }
-        return NewDeck;
+
+        return  NewDeck;
     }
 
     public void ShowDeck() {
@@ -22,3 +36,5 @@ public class Deck {
         }
     }
 }
+
+
