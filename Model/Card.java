@@ -3,19 +3,19 @@ package Model;
 import java.util.Objects;
 
 public class Card {
-    private String value;
+    private int value;
     private String suit;
 
-    public Card(String value, String suit) {
+    public Card(int value, String suit) {
         this.value = value;
         this.suit = suit;
     }
     public Card(){
-        this("","");
+        this(Integer.parseInt(""),"");
     }
 
 
-    public String getValue() {
+    public int getValue() {
         return value;
     }
 
@@ -23,7 +23,7 @@ public class Card {
         return suit;
     }
 
-    public void setValue(String value) {
+    public void setValue(int value) {
         this.value = value;
     }
 
@@ -41,9 +41,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "value=" + value +
-                ", suit='" + suit + '\'' +
-                '}';
+        return "Card{" + value +" " + suit + '}';
     }
 }

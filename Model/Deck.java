@@ -1,39 +1,42 @@
 package Model;
 import Model.Card;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class Deck {
 
-    public static Card [] NewDeck = new Card[52];
-    private static String[] Suits = new String[] {"Corazones", "Diamantes", "Tréboles", "Picas"};
-    private static String[] Values = new String[] {"As", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+    public  Card [] cards = new Card[52];
+    private  String[] suits = new String[] {"Corazones", "Diamantes", "Tréboles", "Picas"};
+    private  int[] values = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 
-    public Deck(){
-        rellenarmazo();
-    }
+
 
     /**
      * Quiero rellenar mi mazo
      * Una carta esta formada por un string y un entero
      */
-    public static Card [] rellenarmazo(){
+    public void  rellenarmazo(){
         int index = 0;
         //devolver arreglo
-        int Cards []=new int[52];
-        for (String Suit : Suits) {
-            for (String Values : Values) {
-                NewDeck[index] = new Card(Values, Suit);
-
+        for (String Suit : suits) {
+            for (int Values : values) {
+                 cards[index] = new Card(Values, Suit);
                 index++;
             }
         }
 
-        return  NewDeck;
     }
 
-    public void ShowDeck() {
-        for (Card card : NewDeck) {
-            System.out.println(card);
-        }
+    public void ShuffleDeck() {
+        Collections.shuffle(Arrays.asList(cards));
+    }
+
+    @Override
+    public String toString() {
+        return "Deck{" +
+                "Card=" + Arrays.toString(cards) +
+                '}';
     }
 }
 
