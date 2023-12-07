@@ -8,9 +8,7 @@ public class Deck {
 
     public  Card [] cards = new Card[52];
     private  String[] suits = new String[] {"Corazones", "Diamantes", "Tréboles", "Picas"};
-    private  int[] values = new int[] {1, 2, 3, 4
-
-            +5, 6, 7, 8, 9, 10, 11, 12, 13};
+    private  int[] values = new int[] {1, 2, 3, 4 ,5, 6, 7, 8, 9, 10, 11, 12, 13};
 
     private int cardIndex = 0;
 
@@ -52,5 +50,8 @@ public class Deck {
         return "Deck{" +
                 "Card=" + Arrays.toString(cards) +
                 '}';
+    }
+    public Card[] getCards() {
+        return this.cards;
     }
 }

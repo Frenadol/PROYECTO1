@@ -1,7 +1,17 @@
+package View;
+
+import Model.Game;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
+    public static void main(String[] args) {
+        Menu menu = new Menu();
+        menu.Showmenu();
+
+    }
+
     private Scanner input;
     private int choice;
     private int numPlayers;
@@ -14,7 +24,7 @@ public class Menu {
         this.playerNames = null;
     }
 
-    public void menu() {
+    public void Showmenu() {
         while (choice != 2) {
             System.out.println("\033[1;36m*********************************************");
             System.out.println("*  🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲  *");

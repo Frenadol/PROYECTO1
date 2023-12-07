@@ -1,56 +1,68 @@
-import Model.Card;
-import Model.Player;
-import Model.Deck;
-import Model.Card;
-import com.sun.jdi.Value;
-import View.*;
 
-import java.awt.*;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class TEST {
+
+    private static Scanner input;
+    private static int choice;
+    private static int numPlayers;
+    private static String[] playerNames;
+
+    public TEST() {
+        this.input = new Scanner(System.in);
+        this.choice = 0;
+        this.numPlayers = 0;
+        this.playerNames = null;
+    }
+
     public static void main(String[] args) {
+        Showmenu();
+    }
 
-     Deck deck= new Deck();
-     deck.rellenarmazo();
-     deck.ShuffleDeck();
-        System.out.println(deck);
-
-
-        class Deck {
-            public static Card[] newDeck = new Card[52];
-            private static String[] suits = new String[]{"Corazones", "Diamantes", "Tréboles", "Picas"};
-            private static int[] values = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-
-            public Deck() {
-                rellenarmazo();
-            }
-
-            /**
-             * Quiero rellenar mi mazo
-             * Una carta esta formada por un string y un entero
-             */
-            public static Card [] rellenarmazo() {
-                int index = 0;
-                for (String Suit : suits) {
-                    for (int Values : values) {
-                        newDeck[index] = new Card(Values, Suit);
-                        index++;
-                    }
+    public static void Showmenu() {
+        while (choice != 2) {
+            System.out.println("\033[1;36m*********************************************");
+            System.out.println("*  🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲  *");
+            System.out.println("*  ♠️♥️♣️♦️ **CASINO DE MONTEPINAR** ♦️♣️♥️♠️ *");
+            System.out.println("*  🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲  *");
+            System.out.println("*********************************************");
+            System.out.println("💰💰💰 1: Empezar el juego 💰💰💰");
+            System.out.println("🚪🚪🚪 2: Salir del casino 🚪🚪🚪");
+            System.out.println("*********************************************\033");
+            System.out.print("Ingrese su elección: ");
+            try {
+                choice = input.nextInt();
+                switch (choice) {
+                    case 1:
+                        System.out.println("¡Comencemos con la caprichosa!");
+                        System.out.print("Ingrese el número de jugadores (1-4): ");
+                        numPlayers = input.nextInt();
+                        if (numPlayers < 1 || numPlayers > 4) {
+                            System.out.println("Error: Por favor, ingrese un número entre 1 y 4.");
+                        } else {
+                            playerNames = new String[numPlayers];
+                            for (int i = 0; i < numPlayers; i++) {
+                                System.out.print("Ingrese el nombre del jugador " + (i + 1) + ": ");
+                                playerNames[i] = input.next();
+                            }
+                            System.out.println("¡Comenzando el juego con " + numPlayers + " jugadores!");
+                        }
+                        break;
+                    case 2:
+                        System.out.println("¡Gracias por visitar el casino!");
+                        break;
+                    default:
+                        System.out.println("Opción inválida. Por favor, seleccione un valor correcto.");
+                        break;
                 }
-                return  newDeck;
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Por favor, ingrese un valor correcto.");
+                input.next(); // descarta la entrada incorrecta para volver a pedir un valor correcto
             }
-
-
-            }
-
         }
-
-
     }
 
 
-
-
-
-
+}
 
