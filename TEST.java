@@ -1,9 +1,11 @@
 import Model.Card;
-import Model.Game;
 import Model.Player;
 import Model.Deck;
 import Model.Card;
 import com.sun.jdi.Value;
+import View.*;
+
+import java.awt.*;
 
 public class TEST {
     public static void main(String[] args) {
@@ -42,6 +44,7 @@ public class TEST {
             }
 
         }
+
 
     }
 
