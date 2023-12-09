@@ -1,7 +1,6 @@
 package View;
-
+import Controller.MainController;
 import Model.Game;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -9,7 +8,6 @@ public class Menu {
     public static void main(String[] args) {
         Menu menu = new Menu();
         menu.Showmenu();
-
     }
 
     private Scanner input;
@@ -20,22 +18,21 @@ public class Menu {
 
     public Menu() {
         this.input = new Scanner(System.in);
-        this.choice = 0;
         this.numPlayers = 0;
         this.playerNames = null;
         this.isAI = false;
     }
 
     public void Showmenu() {
-        while (choice != 2) {
-            System.out.println("\033[1;36m*********************************************");
+        do {
+            System.out.println("\u001B[34m*********************************************");
             System.out.println("*  🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲  *");
             System.out.println("*  ♠️♥️♣️♦️ **CASINO DE MONTEPINAR** ♦️♣️♥️♠️ *");
             System.out.println("*  🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲  *");
             System.out.println("*********************************************");
             System.out.println("💰💰💰 1: Empezar el juego 💰💰💰");
             System.out.println("🚪🚪🚪 2: Salir del casino 🚪🚪🚪");
-            System.out.println("*********************************************\033");
+            System.out.println("*********************************************\u001B[0m");
             System.out.print("Ingrese su elección: ");
             try {
                 choice = input.nextInt();
@@ -58,6 +55,9 @@ public class Menu {
                             } else {
                                 System.out.println("¡Comenzando el juego con " + numPlayers + " jugadores!");
                             }
+                            // Iniciar el juego
+                            Game game = new Game(numPlayers, playerNames, isAI);
+                            game.startGame();
                         }
                         break;
                     case 2:
@@ -71,7 +71,7 @@ public class Menu {
                 System.out.println("Error: Por favor, ingrese un valor correcto.");
                 input.next(); // descarta la entrada incorrecta para volver a pedir un valor correcto
             }
-        }
+        } while (choice != 2);
     }
 
     public Scanner getInput() {

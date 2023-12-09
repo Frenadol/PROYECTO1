@@ -1,39 +1,80 @@
 package Model;
 
 public class Card {
-    private final int value;
-    private final String suit;
-    private final String rank;
+    private int value;
+    private String suit;
 
-    public Card(int value, String suit, String rank) {
-        // Aquí podrías añadir validación para los argumentos
+    public Card(int value, String suit) {
         this.value = value;
         this.suit = suit;
-        this.rank = rank;
     }
 
     public int getValue() {
         return value;
     }
 
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     public String getSuit() {
         return suit;
     }
 
-    public String getRank() {
-        return rank;
+    public void setSuit(String suit) {
+        this.suit = suit;
+    }
+
+    public boolean isAce() {
+        return value == 1;
     }
 
     @Override
     public String toString() {
-        String formattedRank = rank.length() == 1 ? rank + " " : rank;
-        return "Card:\n" +
-                "┌─────────┐\n" +
-                "| " + formattedRank + "      |\n" +
-                "|         |\n" +
-                "|    " + suit + "   |\n" +
-                "|         |\n" +
-                "|      " + formattedRank + " |\n" +
-                "└─────────┘\n";
+        String cardValue;
+        switch (value) {
+            case 1:
+                cardValue = "A";
+                break;
+            case 11:
+                cardValue = "J";
+                break;
+            case 12:
+                cardValue = "Q";
+                break;
+            case 13:
+                cardValue = "K";
+                break;
+            default:
+                cardValue = String.valueOf(value);
+                break;
+        }
+
+        String suitSymbol;
+        switch (suit) {
+            case "Corazones":
+                suitSymbol = "♥";
+                break;
+            case "Diamantes":
+                suitSymbol = "♦";
+                break;
+            case "Tréboles":
+                suitSymbol = "♣";
+                break;
+            case "Picas":
+                suitSymbol = "♠";
+                break;
+            default:
+                suitSymbol = suit;
+                break;
+        }
+
+        return "┌───────┐\n" +
+                "| " + cardValue + "     |\n" +
+                "|       |\n" +
+                "|   " + suitSymbol + "   |\n" +
+                "|       |\n" +
+                "|     " + cardValue + " |\n" +
+                "└───────┘";
     }
 }

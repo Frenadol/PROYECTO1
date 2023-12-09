@@ -20,10 +20,12 @@ public class Deck {
         int index = 0;
         for (String Suit : suits) {
             for (int i = 0; i < ranks.length; i++) {
-                cards[index] = new Card(i+1, Suit, ranks[i]);
+                cards[index] = new Card(i+1, Suit);
                 index++;
+
             }
         }
+        ShuffleDeck();
     }
 
     public void ShuffleDeck() {
