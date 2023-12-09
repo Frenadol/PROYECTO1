@@ -1,60 +1,65 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
-    private String name; // Nombre del jugador
-    private ArrayList<Card> hand; // Las cartas que el jugador tiene en la mano
-    private int score; // La puntuación actual del jugador
+    private String name;
+    private ArrayList<Card> hand;
+    private int score;
+    private boolean isAI;
 
-    public Player(String name) {
+    public Player(String name, boolean isAI) {
         this.name = name;
         this.hand = new ArrayList<>();
         this.score = 0;
+        this.isAI = isAI;
     }
 
-    // Método para agregar una carta a la mano del jugador
     public void addCardToHand(Card card) {
         hand.add(card);
         calculateScore();
     }
 
-    // Método para calcular la puntuación del jugador
     private void calculateScore() {
         score = 0;
-        boolean hasAce = false;
+        int aceCount = 0;
 
         for (Card card : hand) {
             int value = card.getValue();
             if (value > 10) {
                 value = 10; // Para J, Q, K
             } else if (value == 1) {
-                hasAce = true;
+                aceCount++;
+                value = 11;
             }
             score += value;
         }
 
-        // Si el jugador tiene un As y si contar el As como 11 no hace que el jugador se pase de 21, entonces cuenta el As como 11
-        if (hasAce && score + 10 <= 21) {
-            score += 10;
+        while (score > 21 && aceCount > 0) {
+            score -= 10;
+            aceCount--;
         }
     }
 
-    /**
-     *
-     * @return puntuacion de la persona
-     */
     public int getScore() {
         return score;
     }
 
-    public ArrayList<Card> getHand() {
-        return hand;
+    public List<Card> getHand() {
+        return new ArrayList<>(hand);
     }
 
     public String getName() {
         return name;
     }
+    public void setIsAI(boolean isAI) {
+        this.isAI = isAI;
+    }
 
-
+    public boolean getIsAI() {
+        return this.isAI;
+    }
 }
+
+

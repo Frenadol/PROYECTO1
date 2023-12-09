@@ -1,19 +1,16 @@
 package Model;
 
-import java.util.Objects;
-
 public class Card {
-    private int value;
-    private String suit;
+    private final int value;
+    private final String suit;
+    private final String rank;
 
-    public Card(int value, String suit) {
+    public Card(int value, String suit, String rank) {
+        // Aquí podrías añadir validación para los argumentos
         this.value = value;
         this.suit = suit;
+        this.rank = rank;
     }
-    public Card(){
-        this(Integer.parseInt(""),"");
-    }
-
 
     public int getValue() {
         return value;
@@ -23,24 +20,20 @@ public class Card {
         return suit;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public void setSuit(String suit) {
-        this.suit = suit;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Card card = (Card) o;
-        return value == card.value && Objects.equals(suit, card.suit);
+    public String getRank() {
+        return rank;
     }
 
     @Override
     public String toString() {
-        return "Card{" + value +" " + suit + '}';
+        String formattedRank = rank.length() == 1 ? rank + " " : rank;
+        return "Card:\n" +
+                "┌─────────┐\n" +
+                "| " + formattedRank + "      |\n" +
+                "|         |\n" +
+                "|    " + suit + "   |\n" +
+                "|         |\n" +
+                "|      " + formattedRank + " |\n" +
+                "└─────────┘\n";
     }
 }

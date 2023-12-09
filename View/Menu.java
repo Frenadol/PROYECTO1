@@ -16,12 +16,14 @@ public class Menu {
     private int choice;
     private int numPlayers;
     private String[] playerNames;
+    private boolean isAI;
 
     public Menu() {
         this.input = new Scanner(System.in);
         this.choice = 0;
         this.numPlayers = 0;
         this.playerNames = null;
+        this.isAI = false;
     }
 
     public void Showmenu() {
@@ -50,7 +52,12 @@ public class Menu {
                                 System.out.print("Ingrese el nombre del jugador " + (i + 1) + ": ");
                                 playerNames[i] = input.next();
                             }
-                            System.out.println("¡Comenzando el juego con " + numPlayers + " jugadores!");
+                            if (numPlayers == 1) {
+                                isAI = true;
+                                System.out.println("¡Comenzando el juego con " + numPlayers + " jugador y una IA!");
+                            } else {
+                                System.out.println("¡Comenzando el juego con " + numPlayers + " jugadores!");
+                            }
                         }
                         break;
                     case 2:
@@ -65,5 +72,25 @@ public class Menu {
                 input.next(); // descarta la entrada incorrecta para volver a pedir un valor correcto
             }
         }
+    }
+
+    public Scanner getInput() {
+        return input;
+    }
+
+    public int getChoice() {
+        return choice;
+    }
+
+    public int getNumPlayers() {
+        return numPlayers;
+    }
+
+    public String[] getPlayerNames() {
+        return playerNames;
+    }
+
+    public boolean getIsAI() {
+        return isAI;
     }
 }
