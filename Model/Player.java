@@ -43,34 +43,24 @@ public class Player {
         return score;
     }
 
-    public Card[] getHand() {
-        return hand;
-    }
+
 
     public String getName() {
         return name;
     }
 
-    public void setIsAI(boolean isAI) {
-        this.isAI = isAI;
-    }
+
 
     public boolean getIsAI() {
         return this.isAI;
     }
 
     public void showHand() {
+        System.out.println("Cartas en mano de " + name + ":");
         for (int i = 0; i < handSize; i++) {
             System.out.println(hand[i]);
         }
     }
 
-    public boolean checkCardInHand(Card card) {
-        for (int i = 0; i < handSize; i++) {
-            if (hand[i].equals(card)) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 }

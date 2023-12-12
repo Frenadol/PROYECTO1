@@ -12,4 +12,4 @@ public class MainController {
             game.startGame();
         }
     }
-}
+} 

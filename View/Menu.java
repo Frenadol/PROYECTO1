@@ -74,9 +74,6 @@ public class Menu {
         } while (choice != 2);
     }
 
-    public Scanner getInput() {
-        return input;
-    }
 
     public int getChoice() {
         return choice;

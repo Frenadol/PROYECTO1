@@ -1,28 +1,30 @@
 package Model;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 public class Game {
     private Deck deck;
     private Player[] players;
-    private boolean isAI;
-    private Scanner input;
+    private Player aiPlayer;
+
     public Game(int numPlayers, String[] playerNames, boolean isAI) {
         deck = new Deck();
         players = new Player[numPlayers];
-        input = new Scanner(System.in);
         for (int i = 0; i < numPlayers; i++) {
             players[i] = new Player(playerNames[i], false);
         }
         if (isAI) {
-            players[numPlayers - 1].setIsAI(true); // El último jugador es la IA
+            aiPlayer = new Player("IA", true);
         }
-        this.isAI = isAI;
     }
-    public Player getPlayer(int index) {
-        return this.players[index];
-    }
+
+
     public void startGame() {
         for (Player player : players) {
             dealInitialCards(player);
+        }
+        if (aiPlayer != null) {
+            dealInitialCards(aiPlayer);
         }
         boolean gameEnded = false;
         int currentPlayerIndex = 0;
@@ -33,11 +35,18 @@ public class Game {
             } else {
                 playerPlay(currentPlayer);
             }
+            if (currentPlayer.getScore() > 21) {
+                System.out.println(currentPlayer.getIsAI() ? "La IA se ha pasado de 21." : "Te has pasado de 21. ¡Vaya pringao!");
+            }
             currentPlayerIndex++;
             if (currentPlayerIndex >= players.length) {
                 currentPlayerIndex = 0;
             }
             gameEnded = checkAllPlayersBust() || currentPlayerIndex == 0;
+        }
+        if (aiPlayer != null) {
+            System.out.println("Cartas en mano de la IA:");
+            aiPlayer.showHand();
         }
         System.out.println("El ganador es: " + checkWinner());
         System.exit(0);
@@ -50,20 +59,24 @@ public class Game {
         }
         return true;
     }
+
     private void dealInitialCards(Player player) {
         for (int i = 0; i < 2; i++) {
             player.addCardToHand(deck.DrawCard());
         }
     }
+
     private void playerPlay(Player player) {
         System.out.println("Turno de " + player.getName());
         while (true) {
-            System.out.println("Cartas en mano:");
             player.showHand();
             System.out.println("¿Deseas otra carta? (s/n)");
-            String choice = input.next();
+            Scanner scanner = new Scanner(System.in);
+            String choice = scanner.next();
             if (choice.equalsIgnoreCase("s")) {
-                player.addCardToHand(deck.DrawCard());
+                Card newCard = deck.DrawCard();
+                player.addCardToHand(newCard);
+                System.out.println("Has obtenido la carta: " + newCard); // Imprime la nueva carta
                 if (player.getScore() > 21) {
                     System.out.println("Te has pasado de 21. ¡Vaya pringao!");
                     break;
@@ -75,17 +88,21 @@ public class Game {
             }
         }
     }
+
+
     private void aiPlay(Player aiPlayer) {
         System.out.println("Turno de " + aiPlayer.getName());
-        while (aiPlayer.getScore() < 17) {
-            aiPlayer.addCardToHand(deck.DrawCard());
-        }
-        System.out.println("Cartas en mano de " + aiPlayer.getName() + ":");
-        aiPlayer.showHand();
-        if (aiPlayer.getScore() > 21) {
-            System.out.println("La IA se ha pasado de 21.");
+        while (aiPlayer.getScore() < 21) {
+            Card drawnCard = deck.DrawCard();
+            aiPlayer.addCardToHand(drawnCard);
+            System.out.println(aiPlayer.getName() + " ha obtenido la carta: " + drawnCard);
+            if (aiPlayer.getScore() > 21) {
+                System.out.println("La IA se ha pasado de 21.");
+                break;
+            }
         }
     }
+
     public String checkWinner() {
         int maxScore = 0;
         String winner = "";
@@ -96,6 +113,14 @@ public class Game {
                 winner = player.getName();
             }
         }
-        return winner.isEmpty() ? "Dealer" : winner;
+        if (aiPlayer != null && aiPlayer.getScore() > maxScore && aiPlayer.getScore() <= 21) {
+            maxScore = aiPlayer.getScore();
+            winner = aiPlayer.getName();
+        }
+        String result = winner.isEmpty() ? "Dealer" : winner;
+        if (result.equals("IA")) {
+            System.out.println("¡La IA ha ganado el juego!");
+        }
+        return result;
     }
 }
