@@ -16,11 +16,20 @@ public class Player {
         this.handSize = 0;
     }
 
+    /**
+     * Encargado de añadir cartas a las manos de los jugadores
+     * @param card que es la carta
+     */
     public void addCardToHand(Card card) {
         hand[handSize++] = card;
         calculateScore();
     }
 
+    /**
+     * Metodo cuya funcion es la de calcular los puntos recorriendo los  arrays(manos) de los jugadores
+     * En donde obtiene sus valores, las letras J Q y K pasan a tener de valor 10 y el tema de los AS
+     * Dependiendo de la puntuacion valdra un valor u otro
+     */
     private void calculateScore() {
         score = 0;
         int aceCount = 0;
@@ -53,6 +62,10 @@ public class Player {
         return this.isAI;
     }
 
+    /**
+     * funcion encargada de enseñar la mano de cada jugadores compuesta por un arrive que recorre
+     * el arreglo de las cartas de los jugadores y las muestra por pantalla
+     */
     public void showHand() {
         System.out.println("Cartas en mano de " + name + ":");
         for (int i = 0; i < handSize; i++) {

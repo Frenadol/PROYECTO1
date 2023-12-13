@@ -7,6 +7,11 @@ public class Game {
     private Player[] players;
     private Player aiPlayer;
 
+    /**
+     * Metodo que crea los mazos de los jugadores.
+     * @param playerNames inicializa un arreglo con los jugadores con su nombre proporcionado
+     * @param isAI comprueba de que la IA juegue y con el booleano( participa en caso de que solo juegue un jugador)
+     */
     public Game(int numPlayers, String[] playerNames, boolean isAI) {
         deck = new Deck();
         players = new Player[numPlayers];
@@ -18,6 +23,16 @@ public class Game {
         }
     }
 
+    /**
+     * Este metodo hace varias funciones las cuales son
+     * Reparto inicial de cartas con que reparten 2 a cada jugadores(incluyendo a la IA)
+     * Se utiliza un while que se ejecuta hasta que juego termina permitiendo el "bucle" de las interacciones de los jugadores
+     * En caso del turno de la IA (getIsAI() devuelve true) y llama a aiplay para que juegue la IA
+     * Si no es el caso  pasara a playerPlay
+     * Se verifica las condiciones del juego(jugadores pasado de 21 o se acaba el ciclo)
+     * el %se utiliza para lograr un ciclo continuo a través de los índices del arreglo de jugadores,
+     * asegurando que el índice no exceda la longitud del arreglo.
+     */
     public void startGame() {
         dealInitialHands();
         boolean gameEnded = false;
@@ -43,6 +58,11 @@ public class Game {
         System.exit(0);
     }
 
+    /**
+     * Un for each que intera con cada jugaodor, se compara sus puntos y se compara.
+     *
+     * @return si encuentra al menos  un jugador que no ha superado 21 ya lo devuelve, sino devuelve un true diciendo que ya han superado 21
+     */
     private boolean checkAllPlayersBust() {
         for (Player player : players) {
             if (player.getScore() <= 21) {
@@ -52,6 +72,10 @@ public class Game {
         return true;
     }
 
+    /**
+     * Metodo utilizado para inicializar las manos a los jugadores correspondientes( saber a cuantos jugadores tiene que dar las cartas) con un for each
+     * Despues un if cuya funcion es qu si participa la IA que se le asignen dos cartas aleatorias
+     */
     private void dealInitialHands() {
         for (Player player : players) {
             dealInitialCards(player);
@@ -61,12 +85,23 @@ public class Game {
         }
     }
 
+    /**
+     * La diferencia con el de arriba es que este ya sabe el numero de jugadores y asgina 2 cartas a los jugadores participantes
+     * (IA incluida)
+     *
+     */
     private void dealInitialCards(Player player) {
         for (int i = 0; i < 2; i++) {
             player.addCardToHand(deck.drawCard());
         }
     }
 
+    /**
+     * Metodo donde jugaodr juega, se decide si saca otras cartas, enseña las cartas de su mano
+     *  Mientras su puntuacion sea menor a 21 y el jugador quiere seguir sacando cartas se dice un mensaje que si se quiere una cartsa
+     *  Si se eilge "s" se añade otra carta al mazo y tambien se controla si se pasa de 21
+     *
+     */
     private void playerPlay(Player player) {
         System.out.println("Turno de " + player.getName());
         boolean continueDrawing = true;
@@ -98,6 +133,12 @@ public class Game {
         }
     }
 
+    /**
+     * Aqui lo que haces es jugar la IA, poner mensajes de que la IA juega por pantalla,
+     * Se le añaden cartas a su mano
+     * Tambien se tiene control por si se pasa de 21 la IA
+     * @param aiPlayer
+     */
     private void aiPlay(Player aiPlayer) {
         int maxScore = getMaxPlayerScore();
         System.out.println("Turno de " + aiPlayer.getName());
@@ -112,7 +153,12 @@ public class Game {
             }
         }
     }
-
+/**
+ * Se utiliza un bucle for each para iterar con todos los jugadores y se verifica sus puntos obtenidos
+ * Se verifican los puntos de todos los jugadores para saber si es menor o igual que 21
+ * Si es menor a 21 se devuelve false inmediatamente
+ * Si todos tienen 21 se deveuleve un true(Dificil que pase)
+ */
     private int getMaxPlayerScore() {
         int maxScore = 0;
         for (Player player : players) {
@@ -123,6 +169,15 @@ public class Game {
         return maxScore;
     }
 
+    /**
+     * Max score se pone a 0 y winner una cadena vacia
+     * Se utiliza un for each para interar con todos los jugadores del arreglo
+     * Se verifica los puntos de todos los jugadores si su puntuacion es mayor a maxscore y menor a 21
+     * Tambien se tiene en cuenta la verificacion de la IA
+     * Se busca el jugador que tenga el max score y que sea menor o igual que 21
+     * Tambien se verifica la IA por si esta gana
+     * @return el resultado
+     */
     public String checkWinner() {
         int maxScore = 0;
         String winner = "";

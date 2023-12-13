@@ -9,10 +9,13 @@ public class Deck {
     private String[] ranks = new String[] {"As", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 
     public Deck() {
-        rellenarMazo();
+        reshufflingdeck();
     }
 
-    public void rellenarMazo() {
+    /**
+     *Metodo utilizado para rellenar los los mazos
+     */
+    public void reshufflingdeck() {
         int index = 0;
         for (String suit : suits) {
             for (int i = 0; i < ranks.length; i++) {
@@ -22,10 +25,19 @@ public class Deck {
         shuffleDeck();
     }
 
+    /**
+     *  Toma el arreglo cards, lo convierte en una lista, y luego baraja los elementos.
+     *  Esto hace que el arreglo "cards" se reorganizara de manera aleatoria
+     */
     public void shuffleDeck() {
         Collections.shuffle(Arrays.asList(cards));
     }
 
+    /**
+     * Metodo cuya funcion es la toma de la última carta del arreglo cards, la devuelve y luego reduce la longitud del arreglo.
+     * para reflejar la extracción de esa carta
+     * @return
+     */
     public Card drawCard() {
         if (cards.length > 0) {
             Card card = cards[cards.length - 1];

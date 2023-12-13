@@ -23,6 +23,9 @@ public class Menu {
         this.isAI = false;
     }
 
+    /**
+     * El menu, donde se eligen los jugadores, si se juega una contra la IA y se inicia el juego
+     */
     public void Showmenu() {
         do {
             System.out.println("\u001B[34m*********************************************");
