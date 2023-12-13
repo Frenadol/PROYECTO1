@@ -1,6 +1,4 @@
 package Model;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 public class Game {
     private Deck deck;
@@ -45,12 +43,12 @@ public class Game {
             gameEnded = checkAllPlayersBust() || currentPlayerIndex == 0;
         }
         if (aiPlayer != null) {
-            System.out.println("Cartas en mano de la IA:");
             aiPlayer.showHand();
         }
         System.out.println("El ganador es: " + checkWinner());
         System.exit(0);
     }
+
     private boolean checkAllPlayersBust() {
         for (Player player : players) {
             if (player.getScore() <= 21) {
@@ -91,8 +89,14 @@ public class Game {
 
 
     private void aiPlay(Player aiPlayer) {
+        int maxScore=0;
+        for (Player player : players){
+            if(player.getScore()<=21 && player.getScore()>maxScore)
+                maxScore =player.getScore();
+        }
+
         System.out.println("Turno de " + aiPlayer.getName());
-        while (aiPlayer.getScore() < 21) {
+        while (aiPlayer.getScore() <  maxScore ) {
             Card drawnCard = deck.DrawCard();
             aiPlayer.addCardToHand(drawnCard);
             System.out.println(aiPlayer.getName() + " ha obtenido la carta: " + drawnCard);
@@ -102,7 +106,11 @@ public class Game {
             }
         }
     }
-
+    /**
+     * Se encarga de determinar el jugador ganador de la partida, ya sea contra la IA o contra otros jugadores
+     *
+     * @return result (el nombre del jugador ganador)
+     */
     public String checkWinner() {
         int maxScore = 0;
         String winner = "";
@@ -123,4 +131,6 @@ public class Game {
         }
         return result;
     }
+
+
 }

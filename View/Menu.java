@@ -27,7 +27,7 @@ public class Menu {
         do {
             System.out.println("\u001B[34m*********************************************");
             System.out.println("*  🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲  *");
-            System.out.println("*  ♠️♥️♣️♦️ **CASINO DE MONTEPINAR** ♦️♣️♥️♠️ *");
+            System.out.println("*  ♠️♥️♣️♦️ **CASINO DE MONTEPINAR V1.0** ♦️♣️♥️♠️ *");
             System.out.println("*  🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲🎲  *");
             System.out.println("*********************************************");
             System.out.println("💰💰💰 1: Empezar el juego 💰💰💰");

@@ -32,6 +32,8 @@ public class Player {
                 value = 11;
             }
             score += value;
+            setScore(score);
+
         }
         while (score > 21 && aceCount > 0) {
             score -= 10;
@@ -62,5 +64,8 @@ public class Player {
         }
     }
 
+    public void setScore(int score) {
 
+        this.score = score;
+    }
 }
