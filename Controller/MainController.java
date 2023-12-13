@@ -4,10 +4,9 @@ import Model.Game;
 import View.Menu;
 
 public class MainController {
-    public static void main(String[] args) {
+    public void startApp() {
         Menu menu = new Menu();
         menu.Showmenu();
+
     }
 }
-
-

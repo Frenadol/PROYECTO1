@@ -1,3 +1,4 @@
+// Player.java
 package Model;
 
 public class Player {
@@ -33,7 +34,6 @@ public class Player {
             }
             score += value;
             setScore(score);
-
         }
         while (score > 21 && aceCount > 0) {
             score -= 10;
@@ -45,13 +45,9 @@ public class Player {
         return score;
     }
 
-
-
     public String getName() {
         return name;
     }
-
-
 
     public boolean getIsAI() {
         return this.isAI;
@@ -65,7 +61,6 @@ public class Player {
     }
 
     public void setScore(int score) {
-
         this.score = score;
     }
 

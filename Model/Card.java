@@ -12,6 +12,7 @@ public class Card {
     public int getValue() {
         return value;
     }
+
     @Override
     public String toString() {
         String cardValue;
@@ -69,5 +70,4 @@ public class Card {
     public void setSuit(String suit) {
         this.suit = suit;
     }
-
 }

@@ -118,4 +118,7 @@ public class Menu {
     public boolean isAI() {
         return isAI;
     }
+
+    public void showMenu() {
+    }
 }

@@ -1,37 +1,32 @@
 package Model;
-import Model.Card;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 public class Deck {
-
     private Card[] cards = new Card[52];
     private String[] suits = new String[] {"Corazones", "Diamantes", "Tréboles", "Picas"};
     private String[] ranks = new String[] {"As", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 
-    /**
-     * Funcion encargada de rellenar mazo
-     */
     public Deck() {
-        rellenarmazo();
+        rellenarMazo();
     }
 
-    public void rellenarmazo(){
+    public void rellenarMazo() {
         int index = 0;
-        for (String Suit : suits) {
+        for (String suit : suits) {
             for (int i = 0; i < ranks.length; i++) {
-                cards[index++] = new Card(i+1, Suit);
+                cards[index++] = new Card(i + 1, suit);
             }
         }
-        ShuffleDeck();
+        shuffleDeck();
     }
 
-    public void ShuffleDeck() {
+    public void shuffleDeck() {
         Collections.shuffle(Arrays.asList(cards));
     }
 
-    public Card DrawCard() {
+    public Card drawCard() {
         if (cards.length > 0) {
             Card card = cards[cards.length - 1];
             cards = Arrays.copyOf(cards, cards.length - 1);
@@ -40,6 +35,7 @@ public class Deck {
             return null;
         }
     }
+
     @Override
     public String toString() {
         return "Deck{" +
