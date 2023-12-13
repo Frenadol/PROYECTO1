@@ -14,7 +14,7 @@ public class Menu {
     private int choice;
     private int numPlayers;
     private String[] playerNames;
-    private boolean isAI;
+    public boolean isAI;
 
     public Menu() {
         this.input = new Scanner(System.in);
