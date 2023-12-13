@@ -57,4 +57,17 @@ public class Card {
                 "|     " + cardValue + " |\n" +
                 "└───────┘";
     }
+
+    public String getSuit() {
+        return suit;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public void setSuit(String suit) {
+        this.suit = suit;
+    }
+
 }

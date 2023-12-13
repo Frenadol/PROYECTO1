@@ -68,4 +68,32 @@ public class Player {
 
         this.score = score;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Card[] getHand() {
+        return hand;
+    }
+
+    public void setHand(Card[] hand) {
+        this.hand = hand;
+    }
+
+    public boolean isAI() {
+        return isAI;
+    }
+
+    public void setAI(boolean AI) {
+        isAI = AI;
+    }
+
+    public int getHandSize() {
+        return handSize;
+    }
+
+    public void setHandSize(int handSize) {
+        this.handSize = handSize;
+    }
 }

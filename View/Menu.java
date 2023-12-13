@@ -90,4 +90,32 @@ public class Menu {
     public boolean getIsAI() {
         return isAI;
     }
+
+    public void setInput(Scanner input) {
+        this.input = input;
+    }
+
+    public void setChoice(int choice) {
+        this.choice = choice;
+    }
+
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
+
+    public void setPlayerNames(String[] playerNames) {
+        this.playerNames = playerNames;
+    }
+
+    public void setAI(boolean AI) {
+        isAI = AI;
+    }
+
+    public Scanner getInput() {
+        return input;
+    }
+
+    public boolean isAI() {
+        return isAI;
+    }
 }

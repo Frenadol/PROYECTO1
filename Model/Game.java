@@ -1,5 +1,6 @@
 package Model;
 import java.util.Scanner;
+
 public class Game {
     private Deck deck;
     private Player[] players;
@@ -15,7 +16,6 @@ public class Game {
             aiPlayer = new Player("IA", true);
         }
     }
-
 
     public void startGame() {
         for (Player player : players) {
@@ -34,7 +34,7 @@ public class Game {
                 playerPlay(currentPlayer);
             }
             if (currentPlayer.getScore() > 21) {
-                System.out.println(currentPlayer.getIsAI() ? "La IA se ha pasado de 21." : "Te has pasado de 21. ¡Vaya pringao!");
+
             }
             currentPlayerIndex++;
             if (currentPlayerIndex >= players.length) {
@@ -50,12 +50,14 @@ public class Game {
     }
 
     private boolean checkAllPlayersBust() {
-        for (Player player : players) {
-            if (player.getScore() <= 21) {
-                return false;
+        boolean allBust = true;
+        for (int i=0;i< players.length;i++) {
+            if (players[i].getScore() <= 21) {
+                allBust = false;
+
             }
         }
-        return true;
+        return allBust;
     }
 
     private void dealInitialCards(Player player) {
@@ -66,51 +68,55 @@ public class Game {
 
     private void playerPlay(Player player) {
         System.out.println("Turno de " + player.getName());
-        while (true) {
+        boolean continueDrawing = true;
+
+        while (continueDrawing && player.getScore() <= 21) {
             player.showHand();
             System.out.println("¿Deseas otra carta? (s/n)");
             Scanner scanner = new Scanner(System.in);
             String choice = scanner.next();
+
             if (choice.equalsIgnoreCase("s")) {
                 Card newCard = deck.DrawCard();
                 player.addCardToHand(newCard);
-                System.out.println("Has obtenido la carta: " + newCard); // Imprime la nueva carta
+                System.out.println("Has obtenido la carta: \n"  + newCard);
+
                 if (player.getScore() > 21) {
                     System.out.println("Te has pasado de 21. ¡Vaya pringao!");
-                    break;
+                    continueDrawing = false; // Actualiza la variable para salir del bucle
                 }
             } else if (choice.equalsIgnoreCase("n")) {
-                break;
+                continueDrawing = false;
             } else {
                 System.out.println("Opción inválida. Por favor, selecciona 's' o 'n'.");
             }
         }
+
+        // Si el jugador se pasa de 21, muestra el mensaje correspondiente
+        if (player.getScore() > 21) {
+            System.out.println("Turno del siguiente jugador...");
+            // Puedes agregar lógica adicional aquí, como cambiar currentPlayerIndex
+        }
     }
 
-
     private void aiPlay(Player aiPlayer) {
-        int maxScore=0;
-        for (Player player : players){
-            if(player.getScore()<=21 && player.getScore()>maxScore)
-                maxScore =player.getScore();
+        int maxScore = 0;
+        for (Player player : players) {
+            if (player.getScore() <= 21 && player.getScore() > maxScore)
+                maxScore = player.getScore();
         }
 
         System.out.println("Turno de " + aiPlayer.getName());
-        while (aiPlayer.getScore() <  maxScore ) {
+        while (aiPlayer.getScore() < maxScore) {
             Card drawnCard = deck.DrawCard();
             aiPlayer.addCardToHand(drawnCard);
             System.out.println(aiPlayer.getName() + " ha obtenido la carta: " + drawnCard);
-            if (aiPlayer.getScore() > 21) {
+            if(aiPlayer.getScore()>21){
                 System.out.println("La IA se ha pasado de 21.");
-                break;
             }
         }
     }
-    /**
-     * Se encarga de determinar el jugador ganador de la partida, ya sea contra la IA o contra otros jugadores
-     *
-     * @return result (el nombre del jugador ganador)
-     */
+
     public String checkWinner() {
         int maxScore = 0;
         String winner = "";
@@ -132,5 +138,27 @@ public class Game {
         return result;
     }
 
+    public Deck getDeck() {
+        return deck;
+    }
 
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
+
+    public Player[] getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
+    }
+
+    public Player getAiPlayer() {
+        return aiPlayer;
+    }
+
+    public void setAiPlayer(Player aiPlayer) {
+        this.aiPlayer = aiPlayer;
+    }
 }
